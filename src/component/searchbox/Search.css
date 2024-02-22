@@ -99,3 +99,25 @@
   .form-wrapper #submit::-moz-focus-inner {
     border: 0;
   }
+
+
+  @media only screen and (max-width: 600px) {
+    .form-wrapper {
+      width: 100%; /* Make the form full width on smaller screens */
+      display: block;
+    }
+  
+    .form-wrapper #search {
+      width: 100%; /* Make the search input full width */
+      margin-bottom: 10px; /* Add some spacing between the search input and submit button */
+    }
+    .form-wrapper #type {
+      width: 100%; /* Make the search input full width */
+      margin-bottom: 10px; /* Add some spacing between the search input and submit button */
+      height: 40px;
+    }
+  
+    .form-wrapper #submit {
+      width: 100%; /* Make the submit button full width */
+    }
+  }
