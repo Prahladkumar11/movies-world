@@ -18,7 +18,8 @@
     display: flex;
     overflow: hidden;
     padding: 8px;
-    width: 450px;
+    width: 650px;
+    
   }
   
   .form-wrapper #search {
@@ -35,10 +36,16 @@
     height: 42px;
     padding: 10px;
     width: 320px;
+    margin-right: 10px;
+    font-size: 30px;
+    
+  }
+  #type{
+    font-size: 30px;
   }
   
   .form-wrapper #search:focus {
-    border-color: #aaa;
+    border-color: #5f4de8;
     -webkit-box-shadow: 0 1px 1px #bbb inset;
     -moz-box-shadow: 0 1px 1px #bbb inset;
     box-shadow: 0 1px 1px #bbb inset;
@@ -76,6 +83,8 @@
     text-transform: uppercase;
     text-shadow: 0 1px 0 rgba(0, 0 ,0, .3);
     width: 100px;
+    margin-left: 10px;
+    font-size: 25px;
   }
   
   .form-wrapper #submit:hover,
@@ -101,20 +110,23 @@
   }
 
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 650px) {
     .form-wrapper {
-      width: 100%; /* Make the form full width on smaller screens */
+      width: auto; /* Make the form full width on smaller screens */
       display: block;
     }
   
     .form-wrapper #search {
       width: 100%; /* Make the search input full width */
       margin-bottom: 10px; /* Add some spacing between the search input and submit button */
+      font-size: 20px;
     }
     .form-wrapper #type {
       width: 100%; /* Make the search input full width */
       margin-bottom: 10px; /* Add some spacing between the search input and submit button */
       height: 40px;
+      font-size: 20px;
+
     }
   
     .form-wrapper #submit {
