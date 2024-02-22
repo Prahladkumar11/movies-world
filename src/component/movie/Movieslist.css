@@ -1,0 +1,40 @@
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 10px;
+  background-color: #06233a56;
+  padding: 10px;
+}
+
+.movie {
+  background-color: rgba(87, 84, 127, 0.594);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+  height: auto; /* Change to auto to allow content to determine height */
+  width: auto;
+}
+
+.movie img {
+  height: 70%;
+  max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+}
+
+.movie h3 {
+  margin-top: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Ensure the title doesn't exceed the container's width */
+}
+
+@media screen and (max-width: 768px) {
+  .row {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .movie {
+    font-size: 16px;
+  }
+}
