@@ -14,10 +14,8 @@ function App() {
   const [fav, setFav] = useState({});
   const [favPage, setFavPage] = useState(false);
 
-  const getMovies = async (search, page,Type) => {
-    const url = `https://www.omdbapi.com/?apikey=98f1e6c1&s=${search}&page=${page}&type=${Type}`;
-    const response = await fetch(url);
-    const ResponseJson = await response.json();
+  // const a= fav.values()
+  // console.log(a);
 
   const getfav= async (t) => {
     const url=`http://www.omdbapi.com/?i=${t}&apikey=263d22d8`;
