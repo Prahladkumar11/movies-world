@@ -18,7 +18,7 @@ function App() {
   // console.log(a);
 
   const getfav= async (t) => {
-    const url=`http://www.omdbapi.com/?i=${t}&apikey=263d22d8`;
+    const url=`https://www.omdbapi.com/?i=${t}&apikey=263d22d8`;
     const response=await fetch(url);
     const ResponseJson =await response.json();
     // console.log(ResponseJson)
