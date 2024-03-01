@@ -15,7 +15,22 @@ function App() {
   const [favPage, setFavPage] = useState(false);
 
   const getMovies = async (search, page,Type) => {
-    const url = `https://www.omdbapi.com/?apikey=263d22d8&s=${search}&page=${page}&type=${Type}`;
+    const url = `https://www.omdbapi.com/?apikey=98f1e6c1&s=${search}&page=${page}&type=${Type}`;
+    const response = await fetch(url);
+    const ResponseJson = await response.json();
+
+  const getfav= async (t) => {
+    const url=`http://www.omdbapi.com/?i=${t}&apikey=263d22d8`;
+    const response=await fetch(url);
+    const ResponseJson =await response.json();
+    // console.log(ResponseJson)
+    
+    
+    return  ResponseJson
+  };
+  
+  const getMovies = async (search, page, type) => {
+    const url = `https://www.omdbapi.com/?apikey=263d22d8&s=${search}&page=${page}&type=${type}`;
     const response = await fetch(url);
     const responseJson = await response.json();
     // console.log(responseJson);
