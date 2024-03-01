@@ -14,21 +14,8 @@ function App() {
   const [fav, setFav] = useState({});
   const [favPage, setFavPage] = useState(false);
 
-  // const a= fav.values()
-  // console.log(a);
-
-  const getfav= async (t) => {
-    const url=`http://www.omdbapi.com/?i=${t}&apikey=263d22d8`;
-    const response=await fetch(url);
-    const ResponseJson =await response.json();
-    // console.log(ResponseJson)
-    
-    
-    return  ResponseJson
-  };
-  
-  const getMovies = async (search, page, type) => {
-    const url = `https://www.omdbapi.com/?apikey=263d22d8&s=${search}&page=${page}&type=${type}`;
+  const getMovies = async (search, page,Type) => {
+    const url = `https://www.omdbapi.com/?apikey=263d22d8&s=${search}&page=${page}&type=${Type}`;
     const response = await fetch(url);
     const responseJson = await response.json();
     // console.log(responseJson);
