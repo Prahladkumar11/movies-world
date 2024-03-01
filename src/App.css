@@ -1,3 +1,7 @@
+@import '~boxicons/css/boxicons.min.css';
+
+
+
 * {
   box-sizing: border-box;
 }
@@ -11,8 +15,43 @@
   text-align: center;
   color: aqua;
 }
-.search{
+/* .search{
   display: inline-block;
+} */
+.search-container {
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: space-between; /* Distribute items horizontally */
+  padding: 10px; /* Optional: Add padding for better spacing */
 }
 
+.search {
+  /* Center the search box horizontally */
+  margin-right: auto; /* Push the "Favorite" div to the right */
+  margin-left: auto; /* Push the "Favorite" div to the right */
+}
+
+.bx{
+  color: rgb(26, 30, 5);
+  background-color: aqua;
+  font-size: 50px;
+}
+.bx:hover{
+  color: red
+}
+@media (max-width: 768px) {
+  /* Adjust styles for smaller screens */
+  .search-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search {
+    
+    margin-bottom: 10px;
+  }
+  .bx{
+    font: size 30%;
+  }
+}
 

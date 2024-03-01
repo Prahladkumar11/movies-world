@@ -1,60 +1,105 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from 'react';
 import Searchbox from "./component/searchbox/Searchbox";
+import 'boxicons';
 import "./App.css";
 import Movieslist from "./component/movie/Movieslist";
 import Pagination from "./component/Pagination/Pagination";
 
 function App() {
-  const [movies, SetMovies] = useState([]);
-  const [search, Setsearch] = useState("");
-  const [page, setpage] = useState(1);
-  const [Type, SetType] = useState('');
-  const [TotalResult,Settotal]=useState('');
+  const [movies, setMovies] = useState([]);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [type, setType] = useState('');
+  const [totalResult, setTotalResult] = useState();
+  const [fav, setFav] = useState({});
+  const [favPage, setFavPage] = useState(false);
 
-  const getMovies = async (search, page,Type) => {
-    const url = `https://www.omdbapi.com/?apikey=263d22d8&s=${search}&page=${page}&type=${Type}`;
-    const response = await fetch(url);
-    const ResponseJson = await response.json();
+  // const a= fav.values()
+  // console.log(a);
 
-    if (ResponseJson.Search) {
-      SetMovies(ResponseJson.Search);
-      
-      console.log(ResponseJson);
-      
-      
-    } else {
-      SetMovies([]);
-    }
-    return (ResponseJson.totalResults)
+  const getfav= async (t) => {
+    const url=`http://www.omdbapi.com/?i=${t}&apikey=263d22d8`;
+    const response=await fetch(url);
+    const ResponseJson =await response.json();
+    // console.log(ResponseJson)
+    
+    
+    return  ResponseJson
   };
-  useEffect(() => {
-    getMovies(search, page, Type).then((result) => {
-      Settotal(result);
-      
-    });
-  }, [search, page, Type]);
+  
+  const getMovies = async (search, page, type) => {
+    const url = `https://www.omdbapi.com/?apikey=263d22d8&s=${search}&page=${page}&type=${type}`;
+    const response = await fetch(url);
+    const responseJson = await response.json();
+    // console.log(responseJson);
 
-  const handleSearch = (data,data1) => {
-    Setsearch(data);
-    SetType(data1)
-    setpage(1)
+    if (responseJson.Search) {
+      setMovies(responseJson.Search);
+      setTotalResult(responseJson.totalResults);
+    } else {
+      setMovies([]);
+      setTotalResult();
+    }
+  };
+
+  useEffect(() => {
+    getMovies(search, page, type);
+  }, [search, page, type]);
+
+  const handleSearch = (data, data1) => {
+    setSearch(data);
+    setType(data1);
+    setPage(1);
   };
 
   const handlePage = (page) => {
-    setpage(page);
+    setPage(page);
   };
+
+  const handleLike = async (id) => {
+    try {
+      if (fav.hasOwnProperty(id)) {
+        // Remove the IMDb ID from state
+        setFav((prevFav) => {
+          const { [id]: _, ...updatedFav } = prevFav;
+          console.log(updatedFav);
+          return updatedFav;
+        });
+      } else {
+        // Get the result from getfav and update state
+        const result = await getfav(id);
+        setFav((prevFav) => {
+          const newFav = { ...prevFav, [id]: result };
+          console.log(newFav);
+          return newFav;
+        });
+      }
+    } catch (error) {
+      console.error('Error handling like:', error);
+    }
+  };
+  
 
   return (
     <div className="App">
-      <div className="search">
-        <Searchbox props={handleSearch} />
+      <div className="search-container">
+        <div className="search">
+          {favPage?<h1>Favourite List</h1>:<Searchbox props={handleSearch} />}
+          
+        </div>
+        <div className="fav">
+          <i className='bx bx-bookmark-heart bx-border-circle' onClick={() => setFavPage(!favPage)}></i>
+        </div>
       </div>
-      {TotalResult===undefined?null:
-      <h2>Total Result : {TotalResult}</h2>}
-      <Movieslist props={movies} />
-    {movies.length===0?<p></p>:<Pagination page={page} handlePage={handlePage} />}
-
-
+      <div>
+        {totalResult === undefined ? null : favPage?<h2>Total Result : {Object.values(fav).length}</h2>:<h2>Total Result : {totalResult}</h2>}
+        {favPage ? (
+          <Movieslist props={Object.values(fav)} like={fav} handleLike={handleLike} />
+        ) : (
+          <Movieslist props={movies} like={fav} handleLike={handleLike} />
+        )}
+        {movies.length === 0 ? <p></p> : <Pagination page={page} handlePage={handlePage} />}
+      </div>
     </div>
   );
 }

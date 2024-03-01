@@ -26,6 +26,7 @@ function Searchbox({props}) {
 
      <form className="form-wrapper" onSubmit={dataChanges}>
     <input type="text" id="search" placeholder="Search for..." value={value} onChange={dataChange}/>
+    
     <select name="type" id="type" value={type} onChange={(e)=>Settype(e.target.value)}>
       <option value="">Select type</option>
       <option value="movie">Movies</option>
